@@ -1,4 +1,32 @@
-.title {
+.text {
     text-align: center;
-    color: rgb(36, 36, 36);
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.link {
+    display: block;
+    width: 100%;
+    text-align: center;
+    border-radius: 6px;
+    padding: 6px;
+    background-color: rgba(91, 126, 241, 0.35);
+}
+
+.link:hover,
+.link:focus {
+    background-color: rgba(91, 126, 241, 0.5);
+}
+
+@media screen and (min-width: 375px) {
+    .text {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .link {
+        width: 320px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }

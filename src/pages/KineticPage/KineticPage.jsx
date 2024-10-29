@@ -5,6 +5,9 @@ import { useEffect, useId, useState } from "react";
 import css from "./KineticPage.module.css";
 import { kinetic } from "../../funct";
 import { nanoid } from "nanoid";
+import Header from "../../components/Header/Header";
+import MobilMenu from "../../components/Menu/MobilMenu";
+import Title from "../../components/Title/Title";
 
 const energyHistoryArr = () => {
     const saveEnery = window.localStorage.getItem("energyBase");
@@ -19,6 +22,7 @@ const KineticPage = () => {
     const speedFieldId = useId();
     const [energy, setEnergy] = useState(0);
     const [energyData, setEnergyData] = useState(energyHistoryArr);
+    const [mobilMenu, setmobilMenu] = useState(false);
 
     useEffect(() => {
         window.localStorage.setItem("energyBase", JSON.stringify(energyData));
@@ -45,36 +49,85 @@ const KineticPage = () => {
         const kineticDate = kinetic(masa, diameter, speed);
         setEnergy(kineticDate);
         addEnergyData({ id: nanoid(), masa, diameter, speed, kineticDate });
-        actions.resetForm();
+        // actions.resetForm();
     };
 
     return (
         <>
-            <h1>
+            {!mobilMenu ? (
+                <Header mobilMenu={setmobilMenu} />
+            ) : (
+                <MobilMenu mobilMenu={setmobilMenu} />
+            )}
+            <Title>
                 Форма для розрахунку питомої кінетичної енергії стріляного
                 снаряда
-            </h1>
+            </Title>
             <Formik
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
                 validationSchema={validationSchema}
             >
                 <Form className={css.wrapper}>
-                    <label htmlFor={masaFieldId}>Маса, г</label>
-                    <Field type="number" name="masa" id={masaFieldId} />
-                    <ErrorMessage name="masa" component={"span"} />
-                    <label htmlFor={diametrFieldId}>Діаметр снаряда, мм</label>
-                    <Field type="number" name="diameter" id={diametrFieldId} />
-                    <ErrorMessage name="diameter" component={"span"} />
-                    <label htmlFor={speedFieldId}>
-                        Швидкість польоту снаряда, м/с
-                    </label>
-                    <Field type="number" name="speed" id={speedFieldId} />
-                    <ErrorMessage name="speed" component={"span"} />
-                    <button type="submit">Розрахувати</button>
+                    <div>
+                        <label className={css.label} htmlFor={masaFieldId}>
+                            Маса, г
+                        </label>
+                        <Field
+                            className={css.input}
+                            type="number"
+                            name="masa"
+                            id={masaFieldId}
+                        />
+                        <ErrorMessage
+                            className={css.error}
+                            name="masa"
+                            component={"span"}
+                        />
+                    </div>
+                    <div>
+                        <label className={css.label} htmlFor={diametrFieldId}>
+                            Діаметр снаряда, мм
+                        </label>
+                        <Field
+                            className={css.input}
+                            type="number"
+                            name="diameter"
+                            id={diametrFieldId}
+                        />
+                        <ErrorMessage
+                            name="diameter"
+                            component={"span"}
+                            className={css.error}
+                        />
+                    </div>
+                    <div>
+                        <label className={css.label} htmlFor={speedFieldId}>
+                            Швидкість польоту снаряда, м/с
+                        </label>
+                        <Field
+                            className={css.input}
+                            type="number"
+                            name="speed"
+                            id={speedFieldId}
+                        />
+                        <ErrorMessage
+                            name="speed"
+                            component={"span"}
+                            className={css.error}
+                        />
+                    </div>
+                    <div className={css.buttonWrapper}>
+                        <button className={css.button} type="submit">
+                            Розрахувати
+                        </button>
+                        <button className={css.button} type="reset">
+                            Очистити
+                        </button>
+                    </div>
                 </Form>
             </Formik>
-            {energy != 0 && <h2>{energy}</h2>}
+            {energy != 0 && <h2 className={css.result}>{energy}</h2>}
         </>
     );
 };
