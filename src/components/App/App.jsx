@@ -1,10 +1,12 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import css from "./App.module.css";
 
 import Navigation from "../Navigation/Navigation";
 import Loader from "../Loader/Loader";
+import Header from "../Header/Header.jsx";
+import MobilMenu from "../Menu/MobilMenu.jsx";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
 
@@ -21,9 +23,12 @@ const NotFoundPage = lazy(() =>
 );
 
 function App() {
+    const [mobiMenu, setMobiMenu] = useState(false);
+
     return (
         <div className={css.conteiner}>
-            <Navigation />
+            <Header mobilMenu={setMobiMenu} />
+            {mobiMenu && <MobilMenu mobilMenu={setMobiMenu} />}
             <Suspense fallback={<Loader />}>
                 <Routes>
                     <Route path="/" element={<HomePage />} />
