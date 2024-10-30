@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import HistoryList from "../../components/HistoryList/HistoryList";
+import Title from "../../components/Title/Title";
+import MobilMenu from "../../components/Menu/MobilMenu";
+import Header from "../../components/Header/Header";
 
 const energyHistoryArr = () => {
     const saveEnery = window.localStorage.getItem("energyBase");
@@ -10,10 +13,16 @@ const energyHistoryArr = () => {
 
 const HistoryPage = () => {
     const [energy, setEnergy] = useState(energyHistoryArr);
-    console.log(energy);
+    const [mobilMenu, setmobilMenu] = useState(false);
+
     return (
         <>
-            <h1>Історія</h1>
+            {!mobilMenu ? (
+                <Header mobilMenu={setmobilMenu} />
+            ) : (
+                <MobilMenu mobilMenu={setmobilMenu} />
+            )}
+            <Title>Історія</Title>
             {energy.length != 0 ? (
                 <HistoryList arr={energy} />
             ) : (

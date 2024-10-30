@@ -2,7 +2,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useEffect, useId, useState } from "react";
 
-import css from "./KineticPage.module.css";
+import css from "./PowderPage.module.css";
 import { kinetic } from "../../funct";
 import { nanoid } from "nanoid";
 import Header from "../../components/Header/Header";
@@ -16,7 +16,7 @@ const energyHistoryArr = () => {
         : [];
 };
 
-const KineticPage = () => {
+const PowderPage = () => {
     const masaFieldId = useId();
     const diametrFieldId = useId();
     const speedFieldId = useId();
@@ -139,4 +139,4 @@ const KineticPage = () => {
     );
 };
 
-export default KineticPage;
+export default PowderPage;

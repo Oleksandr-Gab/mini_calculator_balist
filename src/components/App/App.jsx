@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Loader from "../Loader/Loader";
 import Layout from "../Layout/Layout.jsx";
+import PowderPage from "../../pages/PowderPage/PowderPage.jsx";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
 
@@ -25,7 +26,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/kinetic" element={<KineticPage />} />
-                    {/* <Route path="/powder" element={<PowderPage />} /> */}
+                    <Route path="/powder" element={<PowderPage />} />
                     <Route path="/history" element={<HistoryPage />} />
 
                     <Route path="*" element={<NotFoundPage />} />
