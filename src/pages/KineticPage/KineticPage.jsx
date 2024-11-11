@@ -67,8 +67,7 @@ const KineticPage = () => {
                 <MobilMenu mobilMenu={setmobilMenu} />
             )}
             <Title>
-                Форма для розрахунку питомої кінетичної енергії стріляного
-                снаряда
+                Розрахунок питомої кінетичної енергії стріляного снаряда
             </Title>
             <Formik
                 initialValues={initialValues}
@@ -134,7 +133,8 @@ const KineticPage = () => {
                     </div>
                 </Form>
             </Formik>
-            {energy != 0 && <h2 className={css.result}>{energy}</h2>}
+            {energy != 0 && <h2 className={css.result}>{energy} Дж/мм2
+</h2>}
         </>
     );
 };
