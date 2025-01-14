@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import HistoryList from "../../components/HistoryList/HistoryList";
-import Title from "../../components/Title/Title";
-import MobilMenu from "../../components/Menu/MobilMenu";
-import Header from "../../components/Header/Header";
+import { useState } from 'react';
+import HistoryList from '../../components/HistoryList/HistoryList';
+import Title from '../../components/Title/Title';
+import MobilMenu from '../../components/Menu/MobilMenu';
+import Header from '../../components/Header/Header';
 
 const energyHistoryArr = () => {
-    const saveEnery = window.localStorage.getItem("energyBase");
+    const saveEnery = window.localStorage.getItem('energyBase');
     return saveEnery !== null && JSON.parse(saveEnery).length !== 0
         ? JSON.parse(saveEnery)
         : [];
@@ -13,7 +13,7 @@ const energyHistoryArr = () => {
 
 const HistoryPage = () => {
     const [energy, setEnergy] = useState(energyHistoryArr);
-    const [mobilMenu, setmobilMenu] = useState(false);
+    const [mobilMenu, setmobilMenu] = useState<boolean>(false);
 
     return (
         <>

@@ -1,16 +1,29 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import * as Yup from "yup";
-import { useEffect, useId, useState } from "react";
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+import * as Yup from 'yup';
+import { useEffect, useId, useState } from 'react';
 
-import css from "./KineticPage.module.css";
-import { kinetic } from "../../funct";
-import { nanoid } from "nanoid";
-import Header from "../../components/Header/Header";
-import MobilMenu from "../../components/Menu/MobilMenu";
-import Title from "../../components/Title/Title";
+import css from './KineticPage.module.css';
+import { kinetic } from '../../funct';
+import { nanoid } from 'nanoid';
+import Header from '../../components/Header/Header';
+import MobilMenu from '../../components/Menu/MobilMenu';
+import Title from '../../components/Title/Title';
+
+type energyDataType = {
+    id?: number;
+    masa: number;
+    diameter: number;
+    speed: number;
+    kineticDate?: number;
+    date?: string;
+};
+
+// type initialValuesType = {
+
+// }
 
 const energyHistoryArr = () => {
-    const saveEnery = window.localStorage.getItem("energyBase");
+    const saveEnery = window.localStorage.getItem('energyBase');
     return saveEnery !== null && JSON.parse(saveEnery).length !== 0
         ? JSON.parse(saveEnery)
         : [];
@@ -20,37 +33,38 @@ const KineticPage = () => {
     const masaFieldId = useId();
     const diametrFieldId = useId();
     const speedFieldId = useId();
-    const [energy, setEnergy] = useState(0);
-    const [energyData, setEnergyData] = useState(energyHistoryArr);
-    const [mobilMenu, setmobilMenu] = useState(false);
+    const [energy, setEnergy] = useState<number>(0);
+    const [energyData, setEnergyData] =
+        useState<energyDataType[]>(energyHistoryArr);
+    const [mobilMenu, setmobilMenu] = useState<boolean>(false);
 
     useEffect(() => {
-        window.localStorage.setItem("energyBase", JSON.stringify(energyData));
+        window.localStorage.setItem('energyBase', JSON.stringify(energyData));
     }, [energyData]);
 
-    const initialValues = {
-        masa: "",
-        diameter: "",
-        speed: "",
+    const initialValues: energyDataType = {
+        masa: 0,
+        diameter: 0,
+        speed: 0,
     };
     const validationSchema = Yup.object().shape({
-        masa: Yup.number().required("Name is required!"),
-        diameter: Yup.number().required("Number is required!"),
-        speed: Yup.number().required("Number is required!"),
+        masa: Yup.number().required('Name is required!'),
+        diameter: Yup.number().required('Number is required!'),
+        speed: Yup.number().required('Number is required!'),
     });
 
-    const addEnergyData = (newEnergyData) => {
-        setEnergyData((prevenergyData) => {
+    const addEnergyData = (newEnergyData: energyDataType): void => {
+        setEnergyData(prevenergyData => {
             return [...prevenergyData, newEnergyData];
         });
     };
 
-    const handleSubmit = ({ masa, diameter, speed }, actions) => {
+    const handleSubmit = ({ masa, diameter, speed }: energyDataType) => {
         const kineticDate = kinetic(masa, diameter, speed);
         const date = new Date().toDateString().slice(4);
         setEnergy(kineticDate);
         addEnergyData({
-            id: nanoid(),
+            id: +nanoid(),
             masa,
             diameter,
             speed,
@@ -88,7 +102,7 @@ const KineticPage = () => {
                         <ErrorMessage
                             className={css.error}
                             name="masa"
-                            component={"span"}
+                            component={'span'}
                         />
                     </div>
                     <div>
@@ -103,7 +117,7 @@ const KineticPage = () => {
                         />
                         <ErrorMessage
                             name="diameter"
-                            component={"span"}
+                            component={'span'}
                             className={css.error}
                         />
                     </div>
@@ -119,7 +133,7 @@ const KineticPage = () => {
                         />
                         <ErrorMessage
                             name="speed"
-                            component={"span"}
+                            component={'span'}
                             className={css.error}
                         />
                     </div>
@@ -133,8 +147,7 @@ const KineticPage = () => {
                     </div>
                 </Form>
             </Formik>
-            {energy != 0 && <h2 className={css.result}>{energy} Дж/мм2
-</h2>}
+            {energy != 0 && <h2 className={css.result}>{energy} Дж/мм2</h2>}
         </>
     );
 };

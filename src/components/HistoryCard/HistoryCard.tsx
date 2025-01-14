@@ -1,8 +1,18 @@
-import css from "./HistoryCard.module.css";
+import css from './HistoryCard.module.css';
+
+type Props = {
+    data: {
+        masa: number;
+        diameter: number;
+        speed: number;
+        kineticDate: number;
+        date: number;
+    };
+};
 
 const HistoryCard = ({
     data: { masa, diameter, speed, kineticDate, date },
-}) => {
+}: Props) => {
     return (
         <div className={css.wrapper}>
             <ul>

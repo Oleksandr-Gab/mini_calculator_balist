@@ -1,22 +1,22 @@
-import { Suspense, lazy, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Suspense, lazy, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 
-import Loader from "../Loader/Loader";
-import Layout from "../Layout/Layout.jsx";
-import PowderPage from "../../pages/PowderPage/PowderPage.jsx";
+import Loader from '../Loader/Loader';
+import Layout from '../Layout/Layout.js';
+import PowderPage from '../../pages/PowderPage/PowderPage.jsx';
 
-const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
+const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
 
-const KineticPage = lazy(() =>
-    import("../../pages/KineticPage/KineticPage.jsx")
+const KineticPage = lazy(
+    () => import('../../pages/KineticPage/KineticPage.jsx')
 );
 
-const HistoryPage = lazy(() =>
-    import("../../pages/HistoryPage/HistoryPage.jsx")
+const HistoryPage = lazy(
+    () => import('../../pages/HistoryPage/HistoryPage.js')
 );
 
-const NotFoundPage = lazy(() =>
-    import("../../pages/NotFoundPage/NotFoundPage")
+const NotFoundPage = lazy(
+    () => import('../../pages/NotFoundPage/NotFoundPage')
 );
 
 function App() {

@@ -1,11 +1,14 @@
-import { IoMdClose } from "react-icons/io";
-import { GiGunshot } from "react-icons/gi";
+import { IoMdClose } from 'react-icons/io';
+import { GiGunshot } from 'react-icons/gi';
 
-import Navigation from "../Navigation/Navigation";
-import css from "./MobilMenu.module.css";
-import { useState } from "react";
+import Navigation from '../Navigation/Navigation';
+import css from './MobilMenu.module.css';
 
-export default function MobilMenu({ mobilMenu }) {
+type Props = {
+    mobilMenu: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export default function MobilMenu({ mobilMenu }: Props) {
     return (
         <div className={css.wrapper}>
             <div className={css.container}>

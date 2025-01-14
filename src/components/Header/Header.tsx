@@ -1,11 +1,12 @@
-import { TiThMenu } from "react-icons/ti";
-import { GiGunshot } from "react-icons/gi";
-import Navigation from "../Navigation/Navigation";
-import MobilMenu from "../Menu/MobilMenu";
-import { useState } from "react";
-import css from "./Header.module.css";
+import { TiThMenu } from 'react-icons/ti';
+import { GiGunshot } from 'react-icons/gi';
+import css from './Header.module.css';
 
-export default function Header({ mobilMenu }) {
+type Props = {
+    mobilMenu: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export default function Header({ mobilMenu }: Props) {
     return (
         <>
             <header className={css.header}>

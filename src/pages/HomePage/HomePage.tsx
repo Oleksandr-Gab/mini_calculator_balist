@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import Header from "../../components/Header/Header";
-import css from "./HomePage.module.css";
-import MobilMenu from "../../components/Menu/MobilMenu";
-import { NavLink } from "react-router-dom";
-import Title from "../../components/Title/Title";
+import Header from '../../components/Header/Header';
+import css from './HomePage.module.css';
+import MobilMenu from '../../components/Menu/MobilMenu';
+import { NavLink } from 'react-router-dom';
+import Title from '../../components/Title/Title';
 
 export default function HomePage() {
-    const [mobilMenu, setmobilMenu] = useState(false);
+    const [mobilMenu, setmobilMenu] = useState<boolean>(false);
 
     return (
         <div className={css.container}>

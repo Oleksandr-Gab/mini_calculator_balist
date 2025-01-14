@@ -1,13 +1,13 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import * as Yup from "yup";
-import { useEffect, useId, useState } from "react";
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+import * as Yup from 'yup';
+import { useEffect, useId, useState } from 'react';
 
-import css from "./PowderPage.module.css";
-import { masaPawder } from "../../funct";
-import { nanoid } from "nanoid";
-import Header from "../../components/Header/Header";
-import MobilMenu from "../../components/Menu/MobilMenu";
-import Title from "../../components/Title/Title";
+import css from './PowderPage.module.css';
+import { masaPawder } from '../../funct';
+import { nanoid } from 'nanoid';
+import Header from '../../components/Header/Header';
+import MobilMenu from '../../components/Menu/MobilMenu';
+import Title from '../../components/Title/Title';
 
 // const energyHistoryArr = () => {
 //     const saveEnery = window.localStorage.getItem("energyBase");
@@ -18,7 +18,7 @@ import Title from "../../components/Title/Title";
 
 const PowderPage = () => {
     const diametrFieldId = useId();
-    const [powder, setPowder] = useState(0);
+    const [powder, setPowder] = useState<number>(0);
     // const [energyData, setEnergyData] = useState(energyHistoryArr);
     const [mobilMenu, setmobilMenu] = useState(false);
 
@@ -27,10 +27,10 @@ const PowderPage = () => {
     // }, [energyData]);
 
     const initialValues = {
-        diameter: ""
+        diameter: 0,
     };
     const validationSchema = Yup.object().shape({
-        diameter: Yup.number().required("Number is required!")
+        diameter: Yup.number().required('Number is required!'),
     });
 
     // const addEnergyData = (newEnergyData) => {
@@ -39,8 +39,8 @@ const PowderPage = () => {
     //     });
     // };
 
-    const handleSubmit = ({ diameter }) => {
-        const powderDate = masaPawder( diameter );
+    const handleSubmit = ({ diameter }: { diameter: number }) => {
+        const powderDate = masaPawder(diameter);
         // const date = new Date().toDateString().slice(4);
         setPowder(powderDate);
         // addEnergyData({
@@ -60,9 +60,7 @@ const PowderPage = () => {
             ) : (
                 <MobilMenu mobilMenu={setmobilMenu} />
             )}
-            <Title>
-                Розрахунок мінімальної маси заряду димного пороху 
-            </Title>
+            <Title>Розрахунок мінімальної маси заряду димного пороху</Title>
             <Formik
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
@@ -70,7 +68,7 @@ const PowderPage = () => {
             >
                 <Form className={css.wrapper}>
                     <div>
-                    <label className={css.label} htmlFor={diametrFieldId}>
+                        <label className={css.label} htmlFor={diametrFieldId}>
                             Діаметр снаряда, мм
                         </label>
                         <Field
@@ -81,7 +79,7 @@ const PowderPage = () => {
                         />
                         <ErrorMessage
                             name="diameter"
-                            component={"span"}
+                            component={'span'}
                             className={css.error}
                         />
                     </div>

@@ -1,6 +1,6 @@
-import { FadeLoader } from "react-spinners";
+import { FadeLoader } from 'react-spinners';
 
-import css from "./Loader.module.css";
+import css from './Loader.module.css';
 
 export default function Loader() {
     return (
